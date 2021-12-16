@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  db:
+    image: hypriot/rpi-mysql
+    container_name: "1--DB"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: temp
+      MYSQL_USER: temp
+      MYSQL_PASSWORD: temp
+    ports:
+      - 8081:3306
+  pma:
+    image: phpmyadmin
+    container_name: "1--PMA"
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_USER: temp
+      PMA_PASSWORD: temp
+    ports:
+      - 8080:80

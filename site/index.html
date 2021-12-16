@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Weather Station</title>
+    <link rel="icon" href="assets/logo.png">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="split trenutno">
+        <div class="box">
+            <img src="assets/sun.png" alt="Loading img...">
+            <div class="v-line"></div>
+            <div class="text">
+                <div class="temperature">
+                    <p id="temperature-box" ></p>
+                </div>
+                <div class="humidity">
+                    <p>vlažnost</p>
+                    <p id="humidity-box"></p>
+                </div>
+                <div class="pressure">
+                    <p>pritisak</p>
+                    <p id="pressure-box"></p>
+                    <span>mbar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ISTORIJA-->
+
+    <div class="split istorija">
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>nedelja, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>subota, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>petak, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>cetvrtak, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>sreda, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>utorak, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hx-line"></div>
+
+        <div class="h-box">
+            <img src="assets/sun-cloudy.png" alt="Loading img...">
+            <div class="h-text">
+                <div class="txt-section">
+                    <p class="h-temperature">18°</p>
+                    <div class="h-humidity">
+                        <p class="h-humidity">vlažnost</p>
+                        <p>90%</p>
+                    </div>
+                </div>
+                <div class="hsx-line"></div>
+                <div class="h-date">
+                    <p>ponedeljak, dd.mm.yyyy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+		const url = "http://localhost:5000/temperature";
+		let temperature = document.getElementById("temperature-box");
+        let humidity = document.getElementById("humidity-box");
+        let pressure = document.getElementById("pressure-box");
+		setInterval(function() {
+			const request = new XMLHttpRequest({mozSystem:true}); 	
+			request.open("GET", url, true)
+			request.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status ===200){
+				const response = JSON.parse(this.response);
+                temperature.innerHTML = response['temperature'].toFixed(2) + '°C';
+                humidity.innerHTML = response['humidity'] + '%';
+                pressure.innerHTML = response['pressure'].toFixed(2);
+			}
+		}
+			request.send()	
+		}, 1000)
+	</script>
+</body>
+
+</html>
